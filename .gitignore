@@ -1,0 +1,16 @@
+# 原始大体积 PDF 与转录文本（受版权与 Git 体积约束，仅保留本地冷档案真源）
+sources/raw/*.pdf
+sources/raw/*.txt
+sources/raw/*.md
+
+# 保留目录考订与全部研究成果
+!sources/catalog_lun_xitong_gongcheng.md
+
+# 运行与环境缓存
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
+.env
+.env.*
