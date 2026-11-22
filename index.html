@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>钱学森系统工程思想体系全维研究 · 在线文献门户</title>
+  <meta name="description" content="钱学森系统工程思想体系全维研究：从新中国低资源约束破局到 AI 时代新组织系统（四大原著考据 + 00–06 七大专题十四篇专论）" />
+
+  <!-- Docsify Base Theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+  <!-- KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <style>
+    :root {
+      --bg-page: #fcfaf5;
+      --bg-sidebar: #f4efe4;
+      --bg-card: #ffffff;
+      --bg-code: #f5f2eb;
+      --bg-quote: #f7f3e9;
+      --border-color: #e4dccb;
+      --text-primary: #1f2937;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --accent: #1d4ed8;
+      --accent-soft: rgba(29, 78, 216, 0.08);
+      --seal: #9f1239;
+      --table-stripe: #faf7f0;
+      --shadow-sm: 0 2px 10px rgba(31, 41, 55, 0.06);
+      --theme-color: #1d4ed8;
+    }
+
+    html[data-theme="dark"] {
+      --bg-page: #0c121e;
+      --bg-sidebar: #111827;
+      --bg-card: #161f30;
+      --bg-code: #0a0f1a;
+      --bg-quote: #151e2e;
+      --border-color: #26334d;
+      --text-primary: #e5e7eb;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-soft: rgba(96, 165, 250, 0.14);
+      --seal: #fb7185;
+      --table-stripe: #131b2b;
+      --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.45);
+      --theme-color: #60a5fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Reading progress bar */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--seal), var(--accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Floating theme toggle & repo toolbar */
+    .portal-toolbar {
+      position: fixed;
+      top: 14px;
+      right: 22px;
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .toolbar-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Sidebar overrides */
+    .sidebar {
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding-top: 14px;
+    }
+
+    .sidebar .app-name-link {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary) !important;
+      letter-spacing: 0.02em;
+    }
+
+    .sidebar .search {
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 10px;
+      padding: 8px 12px 12px;
+    }
+
+    .sidebar .search input {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+
+    .sidebar .search input:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .sidebar .search .matching-post {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar .search .matching-post h2 {
+      font-size: 13.5px;
+      color: var(--accent);
+    }
+
+    .sidebar .search .matching-post p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .sidebar-nav > ul > li > p,
+    .sidebar-nav > ul > li > strong {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--seal);
+      margin: 14px 0 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .sidebar ul li a {
+      color: var(--text-secondary);
+      font-size: 13.5px;
+      line-height: 1.55;
+      padding: 3px 0;
+    }
+
+    .sidebar ul li.active > a {
+      color: var(--accent);
+      font-weight: 600;
+      border-right: 3px solid var(--accent);
+    }
+
+    .sidebar-toggle {
+      background-color: var(--bg-sidebar);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      bottom: 16px;
+      left: 16px;
+    }
+
+    /* Main content area */
+    .content {
+      background-color: var(--bg-page);
+      padding-top: 28px;
+    }
+
+    .markdown-section {
+      max-width: 920px;
+      padding: 24px 36px 72px;
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .markdown-section h1 {
+      font-size: 1.95rem;
+      line-height: 1.35;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.55rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .markdown-section h2 {
+      font-size: 1.42rem;
+      color: var(--text-primary);
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-top: 2.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .markdown-section h3 {
+      font-size: 1.18rem;
+      color: var(--text-primary);
+      margin-top: 1.65rem;
+    }
+
+    .markdown-section h1 a,
+    .markdown-section h2 a,
+    .markdown-section h3 a,
+    .markdown-section h4 a {
+      color: inherit;
+    }
+
+    .markdown-section p,
+    .markdown-section li {
+      color: var(--text-secondary);
+    }
+
+    .markdown-section strong {
+      color: var(--text-primary);
+    }
+
+    .markdown-section a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(29, 78, 216, 0.35);
+    }
+
+    .markdown-section a:hover {
+      border-bottom-style: solid;
+    }
+
+    .markdown-section blockquote {
+      background: var(--bg-quote);
+      border-left: 4px solid var(--seal);
+      color: var(--text-secondary);
+      padding: 12px 18px;
+      margin: 1.2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .markdown-section blockquote p {
+      margin: 0.35rem 0;
+    }
+
+    .markdown-section code {
+      background-color: var(--bg-code);
+      color: var(--seal);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .markdown-section pre {
+      background-color: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .markdown-section pre > code {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 0;
+    }
+
+    .markdown-section table {
+      display: table;
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.4rem 0;
+      font-size: 14.5px;
+      box-shadow: var(--shadow-sm);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .markdown-section th {
+      background-color: var(--accent-soft);
+      color: var(--text-primary);
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .markdown-section td {
+      border: 1px solid var(--border-color);
+      padding: 9px 12px;
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+
+    .markdown-section tr:nth-child(2n) td {
+      background-color: var(--table-stripe);
+    }
+
+    .markdown-section hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 2rem 0;
+    }
+
+    /* Mermaid & KaTeX containers */
+    .mermaid-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .katex-block-wrap {
+      overflow-x: auto;
+      padding: 8px 4px;
+      margin: 0.9rem 0;
+    }
+
+    .katex-display {
+      margin: 0.4em 0;
+    }
+
+    /* Pagination overrides */
+    .docsify-pagination-container {
+      border-top: 1px solid var(--border-color) !important;
+      margin-top: 3rem !important;
+      padding-top: 1.2rem !important;
+    }
+
+    .pagination-item-label {
+      color: var(--text-muted) !important;
+      font-size: 12px !important;
+    }
+
+    .pagination-item-title {
+      color: var(--accent) !important;
+      font-size: 14.5px !important;
+    }
+
+    @media (max-width: 768px) {
+      .markdown-section {
+        padding: 18px 18px 64px;
+      }
+      .portal-toolbar {
+        top: 10px;
+        right: 12px;
+      }
+      .markdown-section table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <div class="portal-toolbar">
+    <button id="theme-toggle" class="toolbar-btn" type="button" title="切换学术昼/夜阅读模式">
+      <span id="theme-icon">☾</span>
+      <span id="theme-label">墨玉夜读</span>
+    </button>
+  </div>
+
+  <div id="app">正在加载钱学森系统工程思想体系研究库…</div>
+
+  <script>
+    // Escape HTML before inserting raw Mermaid text so <br/> etc. stay intact via textContent
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // Theme management
+    const THEME_KEY = "qian_syseng_theme";
+    function getSavedTheme() {
+      try {
+        return localStorage.getItem(THEME_KEY) || "light";
+      } catch (_) {
+        return "light";
+      }
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      const icon = document.getElementById("theme-icon");
+      const label = document.getElementById("theme-label");
+      if (icon && label) {
+        if (theme === "dark") {
+          icon.textContent = "☀";
+          label.textContent = "宣纸昼读";
+        } else {
+          icon.textContent = "☾";
+          label.textContent = "墨玉夜读";
+        }
+      }
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch (_) {}
+    }
+
+    applyTheme(getSavedTheme());
+
+    // Render all Mermaid diagrams using stored raw source so theme switching works cleanly
+    async function renderMermaidBlocks() {
+      if (!window.mermaid) return;
+      const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "neutral";
+      window.mermaid.initialize({
+        startOnLoad: false,
+        theme: theme,
+        securityLevel: "loose",
+        flowchart: { useMaxWidth: true, htmlLabels: true }
+      });
+
+      const nodes = document.querySelectorAll(".mermaid");
+      for (const node of nodes) {
+        if (!node.dataset.mermaidSrc) {
+          node.dataset.mermaidSrc = node.textContent;
+        } else {
+          node.removeAttribute("data-processed");
+          node.textContent = node.dataset.mermaidSrc;
+        }
+      }
+      if (nodes.length > 0) {
+        try {
+          await window.mermaid.run({ querySelector: ".mermaid" });
+        } catch (err) {
+          console.warn("Mermaid render warning:", err);
+        }
+      }
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", function () {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+      renderMermaidBlocks();
+    });
+
+    // Reading progress indicator
+    window.addEventListener("scroll", function () {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const pct = height > 0 ? Math.min(100, Math.max(0, (scrollTop / height) * 100)) : 0;
+      const bar = document.getElementById("reading-progress");
+      if (bar) bar.style.width = pct.toFixed(1) + "%";
+    });
+
+    // Docsify configuration with safe LaTeX & Mermaid pipeline
+    let mathTokens = [];
+
+    window.$docsify = {
+      name: "钱学森系统工程研究库",
+      nameLink: "#/",
+      repo: "",
+      loadSidebar: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      relativePath: true,
+      homepage: "README.md",
+      notFoundPage: false,
+      search: {
+        maxAge: 3600000,
+        paths: "auto",
+        placeholder: "检索全库（概念 / 原著 / 页码 / 关键词）…",
+        noData: "未找到匹配文献内容",
+        depth: 4,
+        hideOtherSidebarContent: false
+      },
+      pagination: {
+        previousText: "上一篇",
+        nextText: "下一篇",
+        crossChapter: true,
+        crossChapterText: true
+      },
+      copyCode: {
+        buttonText: "复制",
+        errorText: "复制失败",
+        successText: "已复制"
+      },
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === "mermaid") {
+              const id = "mmd-" + Math.random().toString(36).slice(2, 10);
+              return '<div class="mermaid-wrap"><div class="mermaid" id="' + id + '">' + escapeHtml(code) + "</div></div>";
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+      plugins: [
+        function katexAndMermaidPlugin(hook) {
+          // 1. Protect code blocks & extract LaTeX before marked parses underscores/backslashes
+          hook.beforeEach(function (markdown) {
+            mathTokens = [];
+            const codeStashes = [];
+
+            // Stash fenced code blocks (```...```)
+            let safe = markdown.replace(/```[\s\S]*?```/g, function (m) {
+              const idx = codeStashes.length;
+              codeStashes.push(m);
+              return "CODESTASHBLOCK" + idx + "END";
+            });
+
+            // Stash inline code (`...`)
+            safe = safe.replace(/`[^`\n]+`/g, function (m) {
+              const idx = codeStashes.length;
+              codeStashes.push(m);
+              return "CODESTASHINLINE" + idx + "END";
+            });
+
+            // Extract display math $$...$$
+            safe = safe.replace(/\$\$([\s\S]+?)\$\$/g, function (_, expr) {
+              const idx = mathTokens.length;
+              mathTokens.push({ expr: expr.trim(), display: true });
+              return "KATEXBLOCKTOKEN" + idx + "END";
+            });
+
+            // Extract inline math $...$
+            safe = safe.replace(/(?<!\\)(?<!\$)\$(?!\$)([^\n$]+?)(?<!\\)(?<!\$)\$(?!\$)/g, function (match, expr) {
+              const trimmed = expr.trim();
+              if (!trimmed) return match;
+              const idx = mathTokens.length;
+              mathTokens.push({ expr: trimmed, display: false });
+              return "KATEXINLINETOKEN" + idx + "END";
+            });
+
+            // Restore code stashes
+            safe = safe.replace(/CODESTASH(BLOCK|INLINE)(\d+)END/g, function (_, _t, idx) {
+              return codeStashes[Number(idx)];
+            });
+
+            return safe;
+          });
+
+          // 2. Render extracted LaTeX tokens via KaTeX after marked produces HTML
+          hook.afterEach(function (html, next) {
+            const rendered = html.replace(/KATEX(BLOCK|INLINE)TOKEN(\d+)END/g, function (_, _kind, idxStr) {
+              const item = mathTokens[Number(idxStr)];
+              if (!item) return "";
+              if (window.katex) {
+                try {
+                  const out = window.katex.renderToString(item.expr, {
+                    displayMode: item.display,
+                    throwOnError: false,
+                    strict: false
+                  });
+                  return item.display ? '<div class="katex-block-wrap">' + out + "</div>" : out;
+                } catch (err) {
+                  return escapeHtml(item.expr);
+                }
+              }
+              return item.display ? "<pre>$$" + escapeHtml(item.expr) + "$$</pre>" : "<code>$" + escapeHtml(item.expr) + "$</code>";
+            });
+            next(rendered);
+          });
+
+          // 3. Render Mermaid diagrams after DOM update
+          hook.doneEach(function () {
+            renderMermaidBlocks();
+            const bar = document.getElementById("reading-progress");
+            if (bar) bar.style.width = "0%";
+          });
+        }
+      ]
+    };
+  </script>
+
+  <!-- Core Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>
